@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class MasterUIController : MonoBehaviour
 {
-    private enum UIMode {MainMenu, Settings, StartMenu, SetupMenu};
+    private enum UIMode {MainMenu, Settings, StartMenu, SetupMenu, CreateInputMenu, CreateOutputMenu};
     private UIMode uiMode;
 
     void Awake()
@@ -17,6 +17,8 @@ public class MasterUIController : MonoBehaviour
         transform.Find("Settings").gameObject.SetActive(false);
         transform.Find("StartMenu").gameObject.SetActive(false);
         transform.Find("SetupMenu").gameObject.SetActive(false);
+        transform.Find("CreateOutputMenu").gameObject.SetActive(false);
+        transform.Find("CreateInputMenu").gameObject.SetActive(false);
 
         if(uiMode == UIMode.MainMenu)
             transform.Find("MainMenu").gameObject.SetActive(true);
@@ -26,6 +28,10 @@ public class MasterUIController : MonoBehaviour
             transform.Find("StartMenu").gameObject.SetActive(true);
         else if(uiMode == UIMode.SetupMenu)
             transform.Find("SetupMenu").gameObject.SetActive(true);
+        else if(uiMode == UIMode.CreateInputMenu)
+            transform.Find("CreateInputMenu").gameObject.SetActive(true);
+        else if(uiMode == UIMode.CreateOutputMenu)
+            transform.Find("CreateOutputMenu").gameObject.SetActive(true);
     }
     
     #region UI Mode Switch Functions
@@ -50,6 +56,18 @@ public class MasterUIController : MonoBehaviour
     public void Switch_To_SetupMenu_Mode()
     {
         uiMode = UIMode.SetupMenu;
+        Update_UI();
+    }
+
+    public void Switch_To_CreateInputMenu_Mode()
+    {
+        uiMode = UIMode.CreateInputMenu;
+        Update_UI();
+    }
+
+    public void Switch_To_CreateOutputMenu_Mode()
+    {
+        uiMode = UIMode.CreateOutputMenu;
         Update_UI();
     }
     #endregion

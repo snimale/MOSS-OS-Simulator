@@ -11,17 +11,17 @@ public class StartMenuUI : MonoBehaviour
 
     public void OnClick_RUN_MACHINE() 
     {
-        masterUIController.Switch_To_MainMenu_Mode();
+        masterUIController.Switch_To_SetupMenu_Mode();
     }
 
     public void OnClick_CREATE_INPUT() 
     {
-        masterUIController.Switch_To_MainMenu_Mode();
+        masterUIController.Switch_To_CreateInputMenu_Mode();
     }
 
     public void OnClick_CREATE_OUTPUT() 
     {
-        masterUIController.Switch_To_MainMenu_Mode();
+        masterUIController.Switch_To_CreateOutputMenu_Mode();
     }
 
     public void OnClick_BACK() 
