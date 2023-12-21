@@ -10,15 +10,35 @@ public class SetupMenuUI : MonoBehaviour
     private Image phaseImage;
     private TextMeshProUGUI phaseText;
 
+    private GameObject errorUI;
+    private GameObject inputUI;
+    private GameObject outputUI;
+
+    private string inputFileName;
+    private string outputFileName;
     private const int NUMBER_OF_PHASES = 3;
 
-    void Awake()
+    private void Awake()
     {
         transform.parent.gameObject.TryGetComponent<MasterUIController>(out masterUIController);
         transform.Find("Dynamic UI/Select Phase UI/Phase Visual").TryGetComponent<Image>(out phaseImage);
         transform.Find("Dynamic UI/Select Phase UI/Switch Phase UI/Phase Text").TryGetComponent<TextMeshProUGUI>(out phaseText);
         
         Update_Phase_UI(PlayerPrefs.GetInt("last_used_phase_number", 1));
+
+        errorUI = transform.Find("Error UI").gameObject;
+        inputUI = transform.Find("Select Input UI").gameObject;
+        outputUI = transform.Find("Select Output UI").gameObject;
+    }
+
+    private void OnEnable()
+    {
+        errorUI.SetActive(false);
+        inputUI.SetActive(false);
+        outputUI.SetActive(false);
+
+        inputFileName = "";
+        outputFileName = "";
     }
 
     #region Phase Switch UI
@@ -59,12 +79,82 @@ public class SetupMenuUI : MonoBehaviour
 
     public void OnClick_SELECT_INPUT() 
     {
-
+        inputUI.SetActive(true);
     }
 
     public void OnClick_SETECT_OUTPUT() 
     {
-
+        outputUI.SetActive(true);
     }
+
+    public void OnClick_START()
+    {
+        if(inputFileName == "")
+        {
+            changeErrorMessage("No Input File Found!");
+            errorUI.SetActive(true);
+        } 
+        else if(outputFileName == "")
+        {
+            changeErrorMessage("No Output File Found!");
+            errorUI.SetActive(true);
+        } else
+        {
+            // start the machine
+        }
+    }
+    #endregion
+
+    #region Error Message UI
+
+    public void OnClick_ErrorMessage_BACK()
+    {
+        errorUI.SetActive(false);
+    }
+
+    private void changeErrorMessage(string newText)
+    {
+        GameObject errorMessageObject = errorUI.transform.Find("Error Message Text").gameObject;
+        errorMessageObject.TryGetComponent<TextMeshProUGUI>(out TextMeshProUGUI TMP);
+        if(TMP!=null)
+            TMP.text = newText;
+    }
+
+    #endregion
+
+    #region  Select Input UI
+    
+    public void OnClick_selectInputUI_SAVE()
+    {
+        // get component
+        TextMeshProUGUI TMP = transform.Find("Select Input UI/Dynamic UI/InputField/Text Area/Text").gameObject.GetComponent<TextMeshProUGUI>();
+        inputFileName = TMP.text;
+        if(TMP.text.Length <= 1)
+            inputFileName = "";
+    }
+
+    public void OnClick_selectInputUI_BACK()
+    {
+        inputUI.SetActive(false);
+    }
+
+    #endregion
+
+    #region Select Output UI
+
+    public void OnClick_selectOutputUI_SAVE()
+    {
+        // get component
+        TextMeshProUGUI TMP = transform.Find("Select Output UI/Dynamic UI/InputField/Text Area/Text").gameObject.GetComponent<TextMeshProUGUI>();
+        outputFileName = TMP.text;
+        if(TMP.text.Length <= 1)
+            outputFileName = "";
+    }
+
+    public void OnClick_selectOutputUI_BACK()
+    {
+        outputUI.SetActive(false);
+    }
+
     #endregion
 }
