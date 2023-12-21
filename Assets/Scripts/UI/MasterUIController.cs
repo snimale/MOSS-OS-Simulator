@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class MasterUIController : MonoBehaviour
 {
-    private enum UIMode {MainMenu, Settings, StartMenu, SetupMenu, CreateInputMenu, CreateOutputMenu};
+    private enum UIMode {MainMenu, Settings, StartMenu, SetupMenu, CreateInputMenu, CreateOutputMenu, DeleteFilesMenu};
     private UIMode uiMode;
 
     void Awake()
@@ -19,6 +19,7 @@ public class MasterUIController : MonoBehaviour
         transform.Find("SetupMenu").gameObject.SetActive(false);
         transform.Find("CreateOutputMenu").gameObject.SetActive(false);
         transform.Find("CreateInputMenu").gameObject.SetActive(false);
+        transform.Find("DeleteFilesMenu").gameObject.SetActive(false);
 
         if(uiMode == UIMode.MainMenu)
             transform.Find("MainMenu").gameObject.SetActive(true);
@@ -32,6 +33,8 @@ public class MasterUIController : MonoBehaviour
             transform.Find("CreateInputMenu").gameObject.SetActive(true);
         else if(uiMode == UIMode.CreateOutputMenu)
             transform.Find("CreateOutputMenu").gameObject.SetActive(true);
+        else if(uiMode == UIMode.DeleteFilesMenu)
+            transform.Find("DeleteFilesMenu").gameObject.SetActive(true);
     }
     
     #region UI Mode Switch Functions
@@ -70,6 +73,13 @@ public class MasterUIController : MonoBehaviour
         uiMode = UIMode.CreateOutputMenu;
         Update_UI();
     }
+
+    public void Switch_To_DeleteFilesMode()
+    {
+        uiMode = UIMode.DeleteFilesMenu;
+        Update_UI();
+    }
+
     #endregion
 
 }

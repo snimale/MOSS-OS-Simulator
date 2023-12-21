@@ -50,4 +50,21 @@ public class SetupMenuUI : MonoBehaviour
         phaseText.text = "Phase: " + phase.ToString();
     }
     #endregion
+
+    #region Buttons UI
+    public void OnClick_BACK() 
+    {
+        masterUIController.Switch_To_StartMenu_Mode();
+    }
+
+    public void OnClick_SELECT_INPUT() 
+    {
+
+    }
+
+    public void OnClick_SETECT_OUTPUT() 
+    {
+
+    }
+    #endregion
 }

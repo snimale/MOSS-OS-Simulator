@@ -24,6 +24,11 @@ public class StartMenuUI : MonoBehaviour
         masterUIController.Switch_To_CreateOutputMenu_Mode();
     }
 
+    public void OnClick_DELETE_FILES() 
+    {
+        masterUIController.Switch_To_DeleteFilesMode();
+    }
+
     public void OnClick_BACK() 
     {
         masterUIController.Switch_To_MainMenu_Mode();
