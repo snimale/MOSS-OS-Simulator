@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class SetupMenuUI : MonoBehaviour
@@ -100,7 +101,10 @@ public class SetupMenuUI : MonoBehaviour
             errorUI.SetActive(true);
         } else
         {
-            // start the machine
+            PlayerPrefs.SetString("input_file_name", inputFileName);
+            PlayerPrefs.SetString("output_file_name", outputFileName);
+            Debug.Log(inputFileName);
+            SceneManager.LoadScene("Machine");
         }
     }
     #endregion
@@ -131,6 +135,8 @@ public class SetupMenuUI : MonoBehaviour
         inputFileName = TMP.text;
         if(TMP.text.Length <= 1)
             inputFileName = "";
+        else
+            inputFileName = "Inputs/" + inputFileName;
     }
 
     public void OnClick_selectInputUI_BACK()
@@ -149,6 +155,8 @@ public class SetupMenuUI : MonoBehaviour
         outputFileName = TMP.text;
         if(TMP.text.Length <= 1)
             outputFileName = "";
+        else
+            outputFileName = "Outputs/" + outputFileName;
     }
 
     public void OnClick_selectOutputUI_BACK()

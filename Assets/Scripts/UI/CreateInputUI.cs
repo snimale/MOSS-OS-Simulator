@@ -37,8 +37,8 @@ public class CreateInputUI : MonoBehaviour
         // check if valid
         if(checkIfValid_fileName(inputFileName) && checkIfValid_fileContent(inputFileContent))
         {  
-            SaveSystem.init();
-            SaveSystem.saveFile("Inputs/" + inputFileName, inputFileContent);
+            FileHandler.init();
+            FileHandler.saveFile("Inputs/" + inputFileName, inputFileContent);
         }
 
         // enable UI

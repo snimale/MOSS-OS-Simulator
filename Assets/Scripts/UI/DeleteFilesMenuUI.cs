@@ -117,7 +117,7 @@ public class DeleteFilesMenuUI : MonoBehaviour
         deleteFileName = PlayerPrefs.GetString("delete_file_type", "Input") + "s/" + deleteFileName;
 
         // delete file
-        bool deletionSuccessful = SaveSystem.deleteFile(deleteFileName);
+        bool deletionSuccessful = FileHandler.deleteFile(deleteFileName);
 
         if(deletionSuccessful)
             deletionSuccessful_UI.SetActive(true);

@@ -34,8 +34,8 @@ public class CreateOutputUI : MonoBehaviour
         // check if valid & save
         if(checkIfValid_fileName(outputFileName))
         {  
-            SaveSystem.init();
-            SaveSystem.saveFile("Outputs/" + outputFileName, "");
+            FileHandler.init();
+            FileHandler.saveFile("Outputs/" + outputFileName, "");
         }
 
         // enable UI
