@@ -1,3 +1,4 @@
+using System.Linq;
 using TMPro;
 using UnityEngine;
 
@@ -25,9 +26,15 @@ public class CPUUIController : MonoBehaviour
 
     public void updateCPUInfo()
     {
-        RValueUI.GetComponent<TextMeshProUGUI>().text = new string (cpuPhase1.get_R());
-        IRValueUI.GetComponent<TextMeshProUGUI>().text = new string (cpuPhase1.get_IR());
-        ICValueUI.GetComponent<TextMeshProUGUI>().text = new string (cpuPhase1.get_IC());
-        CValueUI.GetComponent<TextMeshProUGUI>().text = cpuPhase1.get_C().ToString();
+        // Before update, int_IC changed to char_IC
+        char[] char_IC = cpuPhase1.get_IC(); // gets integer values
+        for(int i=0; i<char_IC.Length; i++)
+            char_IC[i] += '0';
+        Debug.Log(new string(char_IC));
+        
+        RValueUI.GetComponent<TextMeshProUGUI>().text = new string(cpuPhase1.get_R());
+        IRValueUI.GetComponent<TextMeshProUGUI>().text = new string(cpuPhase1.get_IR());
+        ICValueUI.GetComponent<TextMeshProUGUI>().text = new string(char_IC); 
+        CValueUI.GetComponent<TextMeshProUGUI>().text = ((char)(cpuPhase1.get_C()+'0')).ToString();
     }
 }
