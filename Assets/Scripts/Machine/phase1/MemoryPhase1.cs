@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class MemoryPhase1 : MonoBehaviour
 {
+    [SerializeField] private MemoryUIController memoryUIController;
     private char[, ] memory;
     private const char DEFAULT_MEMORY_CHARACTER = '`'; 
     private const int MEMORY_BLOCK_COUNT = 10;
@@ -24,6 +25,8 @@ public class MemoryPhase1 : MonoBehaviour
             for(int j=0; j<MEMORY_BYTE_PER_WORD; j++)
                 memory[i, j] = DEFAULT_MEMORY_CHARACTER;
         }
+
+        memoryUIController.updateContentTable();
     }
 
     public void printMemory()
@@ -63,6 +66,21 @@ public class MemoryPhase1 : MonoBehaviour
         return DEFAULT_MEMORY_CHARACTER;
     }
 
+    public int get_MEMORY_WORD_PER_BLOCK()
+    {
+        return MEMORY_WORD_PER_BLOCK;
+    }
+
+    public int get_MEMORY_BYTE_PER_WORD()
+    {
+        return MEMORY_BYTE_PER_WORD;
+    }
+
+    public int get_MEMORY_BLOCK_COUNT()
+    {
+        return MEMORY_BLOCK_COUNT;
+    }
+
     #endregion
 
     #region set functions
@@ -71,6 +89,8 @@ public class MemoryPhase1 : MonoBehaviour
     {
         for(int i=0; i<MEMORY_BYTE_PER_WORD; i++)
             memory[realAddress, i] = text[i];
+
+        memoryUIController.updateContentTable();
     }
 
     public void set_block(int realAddress, string block)
@@ -80,11 +100,15 @@ public class MemoryPhase1 : MonoBehaviour
             for(int j=0; j<MEMORY_BYTE_PER_WORD; j++)
                 memory[realAddress + i, j] = block[i * 4 + j];
         }
+
+        memoryUIController.updateContentTable();
     }
 
     public void set_byte(int realAddress, int byteOffset, char value)
     {
         memory[realAddress, byteOffset] = value;
+    
+        memoryUIController.updateContentTable();
     }
 
     #endregion

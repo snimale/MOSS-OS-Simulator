@@ -1,5 +1,4 @@
 using System.Text;
-using System.Threading;
 using UnityEngine;
 
 public class CPUPhase1 : MonoBehaviour
@@ -7,6 +6,7 @@ public class CPUPhase1 : MonoBehaviour
     [SerializeField] private MemoryPhase1 memoryPhase1;
     [SerializeField] private KernelPhase1 kernelPhase1;
     [SerializeField] private CPUUIController cpuUIController;
+    [SerializeField] private KernelUIController kernelUIController;
     [SerializeField] private float executionLatency;
     private char[] R;
     private char[] IR; // will contain current instruction (character values only)
@@ -207,12 +207,17 @@ public class CPUPhase1 : MonoBehaviour
             this.set_SI(3);
         }
 
+        // write back
+        cpuUIController.updateCPUInfo();
+        kernelUIController.updateKernelInfo();
+    
+        // check for interrupts
         if(this.get_SI() != 0)
         {
+            // we update UI first, then check for interrupt
+            // this is done as MOS will set SI back to 0, before even update SI value in UI.
             kernelPhase1.MOS();
         }
 
-        // write back
-        cpuUIController.updateCPUInfo();
     }
 }

@@ -30,8 +30,8 @@ public class CPUUIController : MonoBehaviour
         char[] char_IC = cpuPhase1.get_IC(); // gets integer values
         for(int i=0; i<char_IC.Length; i++)
             char_IC[i] += '0';
-        Debug.Log(new string(char_IC));
         
+        // set new text in UI
         RValueUI.GetComponent<TextMeshProUGUI>().text = new string(cpuPhase1.get_R());
         IRValueUI.GetComponent<TextMeshProUGUI>().text = new string(cpuPhase1.get_IR());
         ICValueUI.GetComponent<TextMeshProUGUI>().text = new string(char_IC); 
