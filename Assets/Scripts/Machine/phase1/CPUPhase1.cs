@@ -1,10 +1,12 @@
 using System.Text;
+using System.Threading;
 using UnityEngine;
 
 public class CPUPhase1 : MonoBehaviour
 {
     [SerializeField] private MemoryPhase1 memoryPhase1;
     [SerializeField] private KernelPhase1 kernelPhase1;
+    [SerializeField] private CPUUIController cpuUIController;
     [SerializeField] private float executionLatency;
     private char[] R;
     private char[] IR; // will contain current instruction (character values only)
@@ -58,21 +60,31 @@ public class CPUPhase1 : MonoBehaviour
 
     public char[] get_R()
     {
-        return R;
+        // we return copy, to avoid pass by reference
+        char[] RCopy = new char[4];
+        R.CopyTo(RCopy, 0);
+        return RCopy;
     } 
 
     public char[] get_IR()
     {
-        return IR;
+        // we return copy, to avoid pass by reference
+        char[] IRCopy = new char[4];
+        IR.CopyTo(IRCopy, 0);
+        return IRCopy;
     }
 
     public char[] get_IC()
     {
-        return IC;
+        // we return copy, to avoid pass by reference
+        char[] ICCopy = new char[2];
+        IC.CopyTo(ICCopy, 0);
+        return ICCopy;
     }
 
     public char get_C()
     {
+        // no need to copy and return, as char is not pass by reference
         return C;
     }
 
@@ -199,5 +211,8 @@ public class CPUPhase1 : MonoBehaviour
         {
             kernelPhase1.MOS();
         }
+
+        // write back
+        cpuUIController.updateCPUInfo();
     }
 }
