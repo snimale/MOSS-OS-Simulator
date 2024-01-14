@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 
@@ -5,7 +6,6 @@ public class MemoryUIController : MonoBehaviour
 {
     [SerializeField] private MemoryPhase1 memory;
     [SerializeField] private GameObject memoryUIBlockValue;
-    [SerializeField] private GameObject memoryUIContentTable;
     [SerializeField] private GameObject fullMemoryUI;
     [SerializeField] private GameObject miniMemoryUI;
     private int blockNumber;
@@ -55,7 +55,12 @@ public class MemoryUIController : MonoBehaviour
         for(int i=0; i<memory.get_MEMORY_WORD_PER_BLOCK(); i++)
         {
             string wordObjectName = "Word (" + (i+1).ToString() + ")";
+            string indexObjectName = "Index (" + (i+1).ToString() + ")";
             GameObject wordObject = fullMemoryUI.transform.Find("Content Table/"+wordObjectName).gameObject;
+            GameObject indexObject = fullMemoryUI.transform.Find("Content Table Index/"+indexObjectName).gameObject;
+
+            indexObject.GetComponent<TextMeshProUGUI>().text = String.Format("{0:000}", blockNumber * 10 + i);
+
             for(int j=0; j<memory.get_MEMORY_BYTE_PER_WORD(); j++)
             {
                 string byteObjectName = "Byte (" + (j+1).ToString() + ")";
