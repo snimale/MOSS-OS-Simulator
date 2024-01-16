@@ -7,7 +7,6 @@ public class CPUPhase1 : MonoBehaviour
     [SerializeField] private KernelPhase1 kernelPhase1;
     [SerializeField] private CPUUIController cpuUIController;
     [SerializeField] private KernelUIController kernelUIController;
-    [SerializeField] private float executionLatency;
     private char[] R;
     private char[] IR; // will contain current instruction (character values only)
     private char[] IC; // will point to next instruction (integer value)
@@ -16,6 +15,7 @@ public class CPUPhase1 : MonoBehaviour
     private int SI;
     private bool isExecuting; // is on when $DTA occurs
     private float lastExecutionTime;
+    private float executionLatency; // time between two successive execution
 
     private void OnEnable() 
     {
@@ -23,6 +23,7 @@ public class CPUPhase1 : MonoBehaviour
         SI = 0;
         lastExecutionTime = Time.time;
         isExecuting = false;
+        executionLatency = PlayerPrefs.GetInt("machine_execution_latency", 1);
     }
 
     private void Update()
