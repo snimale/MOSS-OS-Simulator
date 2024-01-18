@@ -39,6 +39,11 @@ public class MainPhase2 : MonoBehaviour
             {
                 if(line[1]=='A' && line[2]=='M' && line[3]=='J')
                 {
+                    // initialize cpu, memory
+                    cpu.set_SI(0);
+                    cpu.initializeCPURegisters();
+                    memory.initializeMemory();
+                    
                     // make pcb
                     PCB pcb = makePCB(line);
                     cpu.setCurrentPCB(pcb);
@@ -49,6 +54,7 @@ public class MainPhase2 : MonoBehaviour
                     cpu.set_PTR(pageTableBlockNumber);
 
                     // update Block Type in Block Memory UI
+                    memoryUIController2.initBlockMemoryUITable();
                     memoryUIController2.blockMemoryUITable_ADD_PAGE_TABLE(pageTableBlockNumber);
 
 

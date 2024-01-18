@@ -10,20 +10,19 @@ public class CPUUIController : MonoBehaviour
     [SerializeField] private GameObject IRValueUI;
     [SerializeField] private GameObject ICValueUI;
     [SerializeField] private GameObject CValueUI;
-    void OnEnable()
+    
+    private void OnEnable()
     {
         initializeCPUInfo();
         cpuUI.SetActive(true);
     }
-
-    private void initializeCPUInfo()
+    public void initializeCPUInfo()
     {
         RValueUI.GetComponent<TextMeshProUGUI>().text = "0000";
         IRValueUI.GetComponent<TextMeshProUGUI>().text = "0000";
         ICValueUI.GetComponent<TextMeshProUGUI>().text = "00";
         CValueUI.GetComponent<TextMeshProUGUI>().text = "0";
     }
-
     public void updateCPUInfo()
     {
         // Before update, int_IC changed to char_IC

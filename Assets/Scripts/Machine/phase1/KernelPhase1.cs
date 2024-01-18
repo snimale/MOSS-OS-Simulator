@@ -40,13 +40,12 @@ public class KernelPhase1 : MonoBehaviour
 
         for(int i=0; i<line.Length; i++)
         {
-            // Debug.Log((int)line[i]);
             if(line[i] == '\0' || line[i] == '\n' || line[i] == '\r' || i>=40) // byte limit of block = 40
                 break;
             else
                 block[i] = line[i];
         }
-        // Debug.Log(block);
+        
         memory.set_block(realAddress, block.ToString());
         cpu.set_SI(0);
     }
@@ -79,11 +78,6 @@ public class KernelPhase1 : MonoBehaviour
         // add two newline to seperate two program cards output
         string terminateSentence = "\n\n";
         output.appendTextInNewOutput(terminateSentence);
-
-        // initialize cpu, memory again
-        cpu.set_SI(0);
-        cpu.initializeCPURegisters();
-        memory.initializeMemory();
 
         // set is executing false
         cpu.set_isExecuting(false);

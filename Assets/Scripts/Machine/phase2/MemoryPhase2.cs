@@ -59,8 +59,6 @@ public class MemoryPhase2 : MonoBehaviour
         {
             allocated[i] = 0;
         }
-
-        memoryUIController.updateContentTable();
     }
 
     public void initializePageTable(int blockNumber)

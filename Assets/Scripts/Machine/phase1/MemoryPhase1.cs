@@ -25,10 +25,7 @@ public class MemoryPhase1 : MonoBehaviour
             for(int j=0; j<MEMORY_BYTE_PER_WORD; j++)
                 memory[i, j] = DEFAULT_MEMORY_CHARACTER;
         }
-
-        memoryUIController.updateContentTable();
     }
-
     public void printMemory()
     {
         for(int i=0; i<10; i++)

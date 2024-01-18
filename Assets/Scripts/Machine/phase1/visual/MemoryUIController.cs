@@ -28,6 +28,7 @@ public class MemoryUIController : MonoBehaviour
         fullMemoryUI.SetActive(false);
     }
 
+    #region FULL UI FUNCTIONS 
     public void OnClick_NEXT()
     {
         blockNumber = (blockNumber + 1) % memory.get_MEMORY_BLOCK_COUNT();
@@ -70,4 +71,5 @@ public class MemoryUIController : MonoBehaviour
             } 
         }
     }
+    #endregion
 }

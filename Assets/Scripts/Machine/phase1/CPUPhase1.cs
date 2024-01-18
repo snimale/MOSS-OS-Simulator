@@ -20,10 +20,9 @@ public class CPUPhase1 : MonoBehaviour
     private void OnEnable() 
     {
         initializeCPURegisters();
-        SI = 0;
         lastExecutionTime = Time.time;
         isExecuting = false;
-        executionLatency = PlayerPrefs.GetInt("machine_execution_latency", 1);
+        executionLatency = PlayerPrefs.GetFloat("machine_execution_latency", 0.1f);
     }
 
     private void Update()
@@ -53,6 +52,8 @@ public class CPUPhase1 : MonoBehaviour
         }
 
         C = (char) 0;
+
+        SI = 0;
     }
 
     #region GET FUNCTION
@@ -133,8 +134,6 @@ public class CPUPhase1 : MonoBehaviour
         for(int i=0; i<4; i++)
             IR[i] = currInstruction[i];
 
-        // Debug.Log((char)(IC[0]+'0')+""+(char)(IC[1]+'0')+" : "+IR[0]+IR[1]+IR[2]+IR[3]);
-
         // decode & execute
         if(IR[0]=='G' && IR[1]=='D')
         {
@@ -204,7 +203,6 @@ public class CPUPhase1 : MonoBehaviour
         
         } else if(IR[0]=='H')
         {
-            //Debug.Log("Terminate");
             this.set_SI(3);
         }
 

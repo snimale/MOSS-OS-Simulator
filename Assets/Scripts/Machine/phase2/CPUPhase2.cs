@@ -24,7 +24,6 @@ public class CPUPhase2 : MonoBehaviour
     private void OnEnable() 
     {
         initializeCPURegisters();
-        SI = 0; PI = 0; TI = 0;
         lastExecutionTime = Time.time;
         isExecuting = false;
         executionLatency = PlayerPrefs.GetFloat("machine_execution_latency", 0.1f);
@@ -59,6 +58,8 @@ public class CPUPhase2 : MonoBehaviour
         }
 
         C = (char) 0;
+
+        SI = 0; PI = 0; TI = 0;
     }
 
     public int addressMap(int currVirtualAddress)
@@ -222,7 +223,7 @@ public class CPUPhase2 : MonoBehaviour
         // Debug.Log((char)(IC[0]+'0')+""+(char)(IC[1]+'0')+" : "+IR[0]+IR[1]+IR[2]+IR[3]);
 
         // decode & execute
-        if(!(IR[2] >= '0' && IR[2] <= '9') || !(IR[3] >= '0' && IR[3] <= '9'))
+        if((!(IR[2] >= '0' && IR[2] <= '9') || !(IR[3] >= '0' && IR[3] <= '9')) && !(IR[0]=='H'))
         {
             // invalid operand
             PI = 2;

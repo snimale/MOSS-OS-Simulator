@@ -3,15 +3,20 @@ using UnityEngine;
 
 public class MainPhase1 : MonoBehaviour
 {
+    #region  UI OBJECTS
+    [SerializeField] private CPUUIController cpuUI;
+    [SerializeField] private MemoryUIController memoryUI;
+    [SerializeField] private KernelUIController kernelUI;
+    #endregion
     [SerializeField] private InputFileObjectScript input;
     [SerializeField] private OutputFileObjectScript output;
     [SerializeField] private MemoryPhase1 memory;
     [SerializeField] private CPUPhase1 cpu;
     
-    [SerializeField] private float loadTime;
-    private float initTime;
-    private int insBlockPTR;
-    private bool isProgramCard;
+    [SerializeField] private float loadTime; // time before the machin starts running
+    private float initTime; // time when the machine was asked to start
+    private int insBlockPTR; // stores the current instruction block number in program card
+    private bool isProgramCard; // used to make sure, only program card is read into instruction blocks
     
     private void OnEnable() 
     {
@@ -19,7 +24,6 @@ public class MainPhase1 : MonoBehaviour
         insBlockPTR = 0;
         isProgramCard = false;
     }
-
     void Update()
     {
         if(Time.time - initTime < loadTime)
@@ -29,19 +33,29 @@ public class MainPhase1 : MonoBehaviour
         else if(!cpu.get_isExecuting()) 
         {
             string line = input.getNextInputLine();
-            //Debug.Log(line);
             if(line[0] == '\0' || line[0] == '\n')
             {
                // end of phase 1 execution (end of file) or empty line
-                   
+
             } else if(line[0]=='$')
             {
                 if(line[1]=='A' && line[2]=='M' && line[3]=='J')
                 {
+                    // initialize cpu, memory
+                    cpu.set_SI(0);
+                    cpu.initializeCPURegisters();
+                    memory.initializeMemory();
+
                     // initialize new output text
                     output.initializeNewOutputFileContent();
                     cpu.set_isExecuting(false);
                     isProgramCard = true;
+
+                    // initialize all UI
+                    cpuUI.initializeCPUInfo();
+                    memoryUI.updateContentTable();
+                    memoryUI.updateBlockNumber();
+                    kernelUI.initializeKernelInfo();
                 }
                 else if(line[1]=='E' && line[2]=='N' && line[3]=='D')
                 {
@@ -72,7 +86,6 @@ public class MainPhase1 : MonoBehaviour
                     insBlockPTR += 10;
                 } else {
                     // continue
-                    //Debug.Log(".");
                 }
             }
         }

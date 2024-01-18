@@ -137,8 +137,9 @@ public class KernelPhase2 : MonoBehaviour
         // increment LLC & Terminate if over limit
         PCB pcb = cpu.get_PCB();
         pcb.set_LLC(pcb.get_LLC()+1);
+        
         if(pcb.get_LLC() > pcb.get_TLL()) 
-        {            
+        {
             int[] terminateCode = new int[2];
             terminateCode[0]=2; terminateCode[1]=0;
             this.TERMINATE_ISR(terminateCode);
@@ -174,7 +175,7 @@ public class KernelPhase2 : MonoBehaviour
                                 +", IR : "+ new string(cpu.get_IR())
                                 +", IC : "+((char)(cpu.get_IC()[0]+'0')).ToString()+((char)(cpu.get_IC()[1]+'0')).ToString()
                                 +", C : "+((char)(cpu.get_C()+'0')).ToString()
-                                +", PTR : "+((char)(cpu.get_PTR()[0]+'0')).ToString()+((char)(cpu.get_PTR()[1]+'0')).ToString()+" ";
+                                +", PTR : "+((char)(cpu.get_PTR()[0]+'0')).ToString()+((char)(cpu.get_PTR()[1]+'0')).ToString()+"\n";
                                 
         string error = "";
         for(int i=0; i<2; i++)
@@ -196,13 +197,6 @@ public class KernelPhase2 : MonoBehaviour
             // $END already read
             output.writeBackNewOutputFileContent();
         }
-
-
-        // initialize cpu, memory again
-        cpu.set_SI(0);
-        cpu.initializeCPURegisters();
-        memory.initializeMemory();
-        memoryUIController2.initBlockMemoryUITable();
 
 
         // set is executing false

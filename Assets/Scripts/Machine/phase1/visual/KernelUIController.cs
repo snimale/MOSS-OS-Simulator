@@ -12,7 +12,7 @@ public class KernelUIController : MonoBehaviour
         kernelUI.SetActive(true);
     }
 
-    private void initializeKernelInfo()
+    public void initializeKernelInfo()
     {
         SIValueUI.GetComponent<TextMeshProUGUI>().text = "0";
     }
