@@ -1,0 +1,2 @@
+light blue : 347c96
+dark blue : 090936
