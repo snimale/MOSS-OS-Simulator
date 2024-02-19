@@ -3,9 +3,9 @@ using UnityEngine;
 
 public class FileHandler : MonoBehaviour
 {
-    private static readonly string SAVE_FOLDER = Application.dataPath + "/Saves/";
-    private static readonly string SAVE_INPUTS_FOLDER = Application.dataPath + "/Saves/Inputs";
-    private static readonly string SAVE_OUTPUTS_FOLDER = Application.dataPath + "/Saves/Outputs";
+    private static readonly string SAVE_FOLDER = Application.persistentDataPath + "/Saves/";
+    private static readonly string SAVE_INPUTS_FOLDER = Application.persistentDataPath + "/Saves/Inputs";
+    private static readonly string SAVE_OUTPUTS_FOLDER = Application.persistentDataPath + "/Saves/Outputs";
 
     public static void init()
     {

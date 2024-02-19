@@ -14,7 +14,7 @@ public class InputFileObjectScript : MonoBehaviour
 
     private void initializeInputFileContent()
     {
-        string fileName = PlayerPrefs.GetString("input_file_name");
+        string fileName = PlayerPrefs.GetString("input_file_name", "default");
         inputFileContent = FileHandler.loadFile(fileName);
         inputFileLinePointer = 0;
         inputFileCharPointer = 0;

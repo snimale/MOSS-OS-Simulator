@@ -17,7 +17,7 @@ public class OutputFileObjectScript : MonoBehaviour
     private void initializeOriginalOutputFileContent()
     {
         // get output file contents
-        string fileName = PlayerPrefs.GetString("output_file_name", "as");
+        string fileName = PlayerPrefs.GetString("output_file_name", "default");
         originalOutputFileContent = FileHandler.loadFile(fileName);
         outputFileCharPointer = 0;
         outputFileLinePointer = 0;

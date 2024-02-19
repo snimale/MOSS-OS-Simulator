@@ -7,6 +7,7 @@ public class CPUPhase1 : MonoBehaviour
     [SerializeField] private KernelPhase1 kernelPhase1;
     [SerializeField] private CPUUIController cpuUIController;
     [SerializeField] private KernelUIController kernelUIController;
+    [SerializeField] private MachineUIController machineUIController;
     private char[] R;
     private char[] IR; // will contain current instruction (character values only)
     private char[] IC; // will point to next instruction (integer value)
@@ -27,7 +28,7 @@ public class CPUPhase1 : MonoBehaviour
 
     private void Update()
     {
-        if(isExecuting && Time.time - lastExecutionTime >= executionLatency)
+        if(!machineUIController.get_isPaused() && isExecuting && (Time.time - lastExecutionTime >= executionLatency))
         {
             execute();
             lastExecutionTime = Time.time;
@@ -114,7 +115,6 @@ public class CPUPhase1 : MonoBehaviour
     {
         isExecuting = value;   
     }
-
     public void set_SI(int value)
     {
         SI = value;   
