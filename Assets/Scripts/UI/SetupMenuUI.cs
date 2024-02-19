@@ -103,7 +103,6 @@ public class SetupMenuUI : MonoBehaviour
         {
             PlayerPrefs.SetString("input_file_name", inputFileName);
             PlayerPrefs.SetString("output_file_name", outputFileName);
-            Debug.Log(inputFileName);
             SceneManager.LoadScene("Machine");
         }
     }
@@ -132,11 +131,20 @@ public class SetupMenuUI : MonoBehaviour
     {
         // get component
         TextMeshProUGUI TMP = transform.Find("Select Input UI/Dynamic UI/InputField/Text Area/Text").gameObject.GetComponent<TextMeshProUGUI>();
+        
+        // get input file name text
         inputFileName = TMP.text;
+
+        // remove end char from raw text
+        inputFileName = inputFileName.Remove(inputFileName.Length-1, 1);
+
         if(TMP.text.Length <= 1)
             inputFileName = "";
         else
             inputFileName = "Inputs/" + inputFileName;
+
+        // close UI after saving the file name
+        OnClick_selectInputUI_BACK();
     }
 
     public void OnClick_selectInputUI_BACK()
@@ -152,11 +160,20 @@ public class SetupMenuUI : MonoBehaviour
     {
         // get component
         TextMeshProUGUI TMP = transform.Find("Select Output UI/Dynamic UI/InputField/Text Area/Text").gameObject.GetComponent<TextMeshProUGUI>();
+        
+        // get output file name text      
         outputFileName = TMP.text;
+
+        // remove end char from raw text
+        outputFileName = outputFileName.Remove(outputFileName.Length-1, 1);
+
         if(TMP.text.Length <= 1)
             outputFileName = "";
         else
             outputFileName = "Outputs/" + outputFileName;
+
+        // close UI after saving the file name
+        OnClick_selectOutputUI_BACK();
     }
 
     public void OnClick_selectOutputUI_BACK()

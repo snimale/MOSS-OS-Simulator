@@ -1,5 +1,4 @@
 using System.Text;
-using TMPro;
 using UnityEngine;
 
 public class MemoryPhase2 : MonoBehaviour

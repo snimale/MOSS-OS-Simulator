@@ -34,15 +34,19 @@ public class CreateInputUI : MonoBehaviour
         string inputFileName = inputFileName_TMP.text;
         string inputFileContent = inputFileContent_TMP.text;
         
+        // remove end char from raw text
+        inputFileName = inputFileName.Remove(inputFileName.Length-1, 1);
+        inputFileContent = inputFileContent.Remove(inputFileContent.Length-1, 1);
+
         // check if valid
         if(checkIfValid_fileName(inputFileName) && checkIfValid_fileContent(inputFileContent))
         {  
             FileHandler.init();
             FileHandler.saveFile("Inputs/" + inputFileName, inputFileContent);
-        }
 
-        // enable UI
-        fileSaved_UI.SetActive(true);
+            // enable UI
+            fileSaved_UI.SetActive(true);
+        }
     }
 
     private bool checkIfValid_fileName(string fileName)
