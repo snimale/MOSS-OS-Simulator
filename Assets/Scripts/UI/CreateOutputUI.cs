@@ -30,16 +30,19 @@ public class CreateOutputUI : MonoBehaviour
    
         // extract text
         string outputFileName = outputFileName_TMP.text;
+
+        // remove end char from raw text
+        outputFileName = outputFileName.Remove(outputFileName.Length-1, 1);
         
         // check if valid & save
         if(checkIfValid_fileName(outputFileName))
         {  
             FileHandler.init();
             FileHandler.saveFile("Outputs/" + outputFileName, "");
-        }
 
-        // enable UI
-        fileSaved_UI.SetActive(true);
+            // enable UI
+            fileSaved_UI.SetActive(true);
+        }
     }
 
     private bool checkIfValid_fileName(string fileName)

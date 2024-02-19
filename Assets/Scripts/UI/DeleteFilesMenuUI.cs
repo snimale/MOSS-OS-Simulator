@@ -62,6 +62,9 @@ public class DeleteFilesMenuUI : MonoBehaviour
         // extract text
         string deleteFileName = deleteFileName_TMP.text;
 
+        // remove end char from raw text
+        deleteFileName = deleteFileName.Remove(deleteFileName.Length-1, 1);
+
         if(deleteFileName.Length <= 1 || deleteFileName.Contains("."))
         {
             // get components
